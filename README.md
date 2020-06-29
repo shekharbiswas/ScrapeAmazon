@@ -1,35 +1,53 @@
-# Amazon Scraper using Selectorlib 
+# Amazon Scraper
 
-A simple amazon scraper to extract product details and prices from Amazon.com using Python Requests and Selectorlib. 
+This code scrape the amazon website and extract the product informations using Python Requests and Selectorlib. 
 
-There are two simple scrapers in this project. 
-1. Amazon Product Page Scraper `amazon.py`
+With the extracted information, we build a dataframe .. 
+
+There are two scrapers in this project. 
+
 1. Amazon Search Results Page Scraper `searchresults.py`
+1. Amazon Product Page Scraper `amazon.py`
 
 ## Usage
 
 From a terminal 
 
-1. Clone this project  `git clone https://github.com/scrapehero-code/amazon-scraper.git` and cd into it `cd amazon-scraper`
-1. Add a Virtual Environment `python3 -m venv .venv` (Optional)
-1. Activate the Virtual Environment `source .venv/bin/activate` (Optional) 
-1. Install Requirements `pip3 install -r requirements.txt`
-
-## Scrape Product Details from Product Page
-
-1. Add Amazon Product URLS to [urls.txt](urls.txt)
-1. Run `python3 amazon.py`
-1. Get data from [output.jsonl](output.jsonl)
+1. Clone this project  `git clone https://github.com/shekharbiswas/ScrapeAmazon.git` and cd into it `cd ScrapeAmazon`
+2. Install Requirements `pip install -r requirements.txt`
 
 ## Scrape Products from Search Results
 
-This scraper only scrapes product from the first page of search results
+This scraper scrapes product from the pages of search.
+The input to the program is a list of URLs of the webpages which contain the search results.
 
-1. Add Amazon Product URLS to [search_results_urls.txt](search_results_urls.txt)
-1. Run `python3 searchresults.py`
-1. Get data from [search_results_output.jsonl](search_results_output.jsonl)
+1. Add Amazon Product URLS to [search_urls.txt](search_results_urls.txt)
+1. Run `python search.py`
+1. Get data from [search_output.jsonl](search_output.jsonl)
+
+## Scrape Product Details from Product Page
+
+1. Add Amazon Product URLS to [product_urls.txt](urls.txt)
+1. Run `python product.py`
+1. Get data from [product_output.jsonl](product_output.jsonl)
+
+
 
 ## Example Data Format
+
+### Search Results 
+Each result would look similar
+
+```json
+{
+    "title": "New ! Dell Inspiron i3583 15.6\" HD Touch-Screen Laptop - Intel i3-8145U - 8GB DDR4-128GB SSD - Windows 10 - Wireless-AC - Bluetooth - SD Card Reader - HDMI & USB 3.1 -Waves MaxxAudio Pro- Black",
+    "url": "/Dell-Inspiron-i3583-Touch-Screen-Laptop/dp/B08173ZTJX/ref=sr_1_3?dchild=1&keywords=laptops&qid=1591584632&sr=8-3",
+    "rating": "4.1 out of 5 stars",
+    "reviews": "122",
+    "price": "$472.00",
+    "search_url": "https://www.amazon.com/s?k=laptops"
+}
+```
 
 ### Product Details
 ```json
@@ -65,16 +83,3 @@ This scraper only scrapes product from the first page of search results
 }
 ```
 
-### Search Results 
-Each result would look similar
-
-```json
-{
-    "title": "New ! Dell Inspiron i3583 15.6\" HD Touch-Screen Laptop - Intel i3-8145U - 8GB DDR4-128GB SSD - Windows 10 - Wireless-AC - Bluetooth - SD Card Reader - HDMI & USB 3.1 -Waves MaxxAudio Pro- Black",
-    "url": "/Dell-Inspiron-i3583-Touch-Screen-Laptop/dp/B08173ZTJX/ref=sr_1_3?dchild=1&keywords=laptops&qid=1591584632&sr=8-3",
-    "rating": "4.1 out of 5 stars",
-    "reviews": "122",
-    "price": "$472.00",
-    "search_url": "https://www.amazon.com/s?k=laptops"
-}
-```
