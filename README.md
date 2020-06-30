@@ -38,6 +38,19 @@ The input to the program is a list of URLs of the webpages which contain the sea
 ### Search Results 
 Each result would look similar
 
+
+```json
+{
+"title": "Anker Soundcore Life Q20 Hybrid Active Noise Cancelling Headphones, Wireless Over Ear Bluetooth Headphones, 40H Playtime, Hi-Res Audio, Deep Bass, Memory Foam Ear Cups, for Travel, Home Office", 
+"url":"https://www.amazon.com/gp/slredirect/picassoRedirect.html/ref=pa_sp_atf_aps_sr_pg1_1?ie=UTF8&adId=A0747095382MMKDOLO3CO&url=%2FSoundcore-Cancelling-Headphones-Wireless-Bluetooth%2Fdp%2FB07NM3RSRQ%2Fref%3Dsr_1_1_sspa%3Fdchild%3D1%26keywords%3DHeadphones%26qid%3D1593525044%26sr%3D8-1-spons%26psc%3D1&qualifier=1593525043&id=4524369138131621&widgetName=sp_atf", 
+"rating": "4.4 out of 5 stars", 
+"review_count": "4,150", 
+"price": "$59.99"
+
+}
+```
+
+
 ```json
 {
     "title": "New ! Dell Inspiron i3583 15.6\" HD Touch-Screen Laptop - Intel i3-8145U - 8GB DDR4-128GB SSD - Windows 10 - Wireless-AC - Bluetooth - SD Card Reader - HDMI & USB 3.1 -Waves MaxxAudio Pro- Black",
