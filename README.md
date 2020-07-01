@@ -51,16 +51,6 @@ Each result would look similar
 ```
 
 
-```json
-{
-    "title": "New ! Dell Inspiron i3583 15.6\" HD Touch-Screen Laptop - Intel i3-8145U - 8GB DDR4-128GB SSD - Windows 10 - Wireless-AC - Bluetooth - SD Card Reader - HDMI & USB 3.1 -Waves MaxxAudio Pro- Black",
-    "url": "/Dell-Inspiron-i3583-Touch-Screen-Laptop/dp/B08173ZTJX/ref=sr_1_3?dchild=1&keywords=laptops&qid=1591584632&sr=8-3",
-    "rating": "4.1 out of 5 stars",
-    "review_count": "122",
-    "price": "$472.00",
-    "search_url": "https://www.amazon.com/s?k=laptops"
-}
-```
 
 ### Product Details
 ```json

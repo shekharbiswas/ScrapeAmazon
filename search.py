@@ -51,5 +51,5 @@ with open("search_urls.txt", 'r') as urllist, open('search_output.jsonl', 'w') a
             for product in data['products']:
                 product['url'] = 'https://www.amazon.com' + product['url']
                 json.dump(product, outfile)
-                outfile.write("\n")
+                outfile.write(", \n")
                 # sleep(5)
