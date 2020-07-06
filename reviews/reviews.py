@@ -4,18 +4,21 @@ import json
 from time import sleep
 import csv
 from dateutil import parser as dateparser
+from fake_useragent import UserAgent
 
 # Create an Extractor by reading from the YAML file
 e = Extractor.from_yaml_file('reviews/selectors.yml')
 
-def scrape(url):    
+def scrape(url):  
+    ua = UserAgent()
+
     headers = {
         'authority': 'www.amazon.com',
         'pragma': 'no-cache',
         'cache-control': 'no-cache',
         'dnt': '1',
         'upgrade-insecure-requests': '1',
-        'user-agent': 'Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36',
+        'user-agent': ua.random,
         'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
         'sec-fetch-site': 'none',
         'sec-fetch-mode': 'navigate',
@@ -37,25 +40,37 @@ def scrape(url):
     return e.extract(r.text)
 
 # product_data = []
-with open("reviews/review_urls.csv",'r') as urllist, open('reviews/data.csv','w') as outfile:
+# get the ASIN code from url text
+with open("reviews/review_urls.csv",'r') as urllist, open('reviews/review_data.csv','w') as outfile:
     writer = csv.DictWriter(outfile, fieldnames=["ASIN","title","content","date","variant","images","verified","author","rating","product","url"],quoting=csv.QUOTE_ALL)
     writer.writeheader()
     for url in urllist.readlines():
-        data = scrape(url) 
+        try:
+            data = scrape(url)  
+        except:
+            continue
         if data:
-            for r in data['reviews']:
-                r["product"] = data["product_title"]
-                r['url'] = url
-                if 'verified' in r:
-                    if 'Verified Purchase' in r['verified']:
-                        r['verified'] = 'Yes'
-                    else:
-                        r['verified'] = 'Yes'
-                r['rating'] = r['rating'].split(' out of')[0]
-                date_posted = r['date'].split('on ')[-1]
-                r['date'] = dateparser.parse(date_posted).strftime('%d %b %Y')
-                try:
-                    writer.writerow(r)
-                except:
-                    continue
-            sleep(5)
+            try:
+                for r in data['reviews']:
+                    r['ASIN'] = url.split('/')[5]
+                    r["product"] = data["product_title"]
+                    r['url'] = url
+                    if 'verified' in r:
+                        try:
+                            if 'Verified Purchase' in r['verified']:
+                                r['verified'] = 'Yes'
+                            else:
+                                r['verified'] = 'No'
+                        except:
+                            continue
+
+                    r['rating'] = r['rating'].split(' out of')[0]
+                    date_posted = r['date'].split('on ')[-1]
+                    r['date'] = dateparser.parse(date_posted).strftime('%d %b %Y')
+                    try:
+                        writer.writerow(r)
+                    except:
+                        continue
+                sleep(1)
+            except:
+                continue
