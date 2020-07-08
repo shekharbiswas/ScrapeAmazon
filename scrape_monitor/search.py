@@ -1,18 +1,17 @@
-import fake_useragent
+import selectorlib
 from selectorlib import Extractor
 import requests
-from fake_useragent import UserAgent
-
 import json
 from time import sleep
+from fake_useragent import UserAgent
+
 
 # Create an Extractor by reading from the YAML file
-e = Extractor.from_yaml_file('products.yml')
+e = Extractor.from_yaml_file('scrape_monitor/search.yml')
+
 
 def scrape(url):
-
     ua = UserAgent()
-
 
     headers = {
         'dnt': '1',
@@ -28,31 +27,39 @@ def scrape(url):
     }
 
     # Download the page using requests
-    print("Downloading %s"%url)
+    print("Downloading %s" % url)
     r = requests.get(url, headers=headers)
     # Simple check to check if page was blocked (Usually 503)
     if r.status_code > 500:
         if "To discuss automated access to Amazon data please contact" in r.text:
-            print("Page %s was blocked by Amazon. Please try using better proxies\n"%url)
+            print(
+                "Page %s was blocked by Amazon. Please try using better proxies\n" % url)
         else:
-            print("Page %s must have been blocked by Amazon as the status code was %d"%(url,r.status_code))
+            print("Page %s must have been blocked by Amazon as the status code was %d" % (
+                url, r.status_code))
         return None
-    # Pass the HTML of the page and create 
+    # Pass the HTML of the page and create
     return e.extract(r.text)
 
+
 # product_data = []
-with open("product_urls.txt",'r') as urllist, open('product_output.jsonl','w') as outfile:
+with open("scrape_monitor/search_urls.txt", 'r') as urllist, open('scrape_monitor/search_output.jsonl', 'r') as outfile:
+    f = open('scrape_monitor/product_urls.txt','w')
     for url in urllist.read().splitlines():
-        data = scrape(url) 
+        data = scrape(url)
+
+       
         if data:
             try:
-                data['seller_link'] = 'https://www.amazon.com' + data['seller_link']
-                data['freq_bought_link'] = 'https://www.amazon.com' + data['freq_bought_link']
-                json.dump(data,outfile)
-                outfile.write("\n")
+                for product in data['products']:
+                    product['url'] = 'https://www.amazon.com' + product['url']
+                    f.write(product['url'])
+                    f.write('\n')
 
+                    #json.dump(product, outfile)
+                    #outfile.write(", \n")
+                    # sleep(5)
+                
             except:
-                json.dump(data,outfile)
-                outfile.write("\n")
-
-            # sleep(1)
+                continue
+    f.close()

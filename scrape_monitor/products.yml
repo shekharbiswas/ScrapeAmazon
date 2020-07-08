@@ -3,7 +3,7 @@ name:
     type: Text
 
 product_summary:
-    css: '##productDetails_techSpec_section_1 tr'
+    css: '#productDetails_techSpec_section_1 tr'
     multiple: true
     type: Text
     children:

@@ -1,0 +1,38 @@
+name:
+    css: '#productTitle'
+    type: Text
+
+
+#productDetails_techSpec_section_2 
+product_details:
+    css: '#productDetails_techSpec_section_1 tr'
+    multiple: true
+    type: Text
+    children:
+        info:
+            css: th
+            type: Text
+        value:
+            css: td
+            type: Text
+
+product_details:
+    css: '#productDetails_techSpec_section_1 tr'
+    multiple: true
+    type: Text
+    children:
+        info:
+            css: th
+            type: Text
+        value:
+            css: td
+            type: Text
+
+
+link_to_all_reviews:
+    css: 'div.card-padding a.a-link-emphasis'
+    type: Link
+
+freq_bought:
+    css: '#sims-fbt-form .a-link-normal'
+    type: Text
