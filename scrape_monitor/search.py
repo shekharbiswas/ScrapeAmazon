@@ -43,7 +43,7 @@ def scrape(url):
 
 
 # product_data = []
-with open("scrape_monitor/search_urls.txt", 'r') as urllist, open('scrape_monitor/search_output.jsonl', 'r') as outfile:
+with open("scrape_monitor/search_urls.txt", 'r') as urllist, open('scrape_monitor/search_output.jsonl', 'w') as outfile:
     f = open('scrape_monitor/product_urls.txt','w')
     for url in urllist.read().splitlines():
         data = scrape(url)
@@ -56,8 +56,8 @@ with open("scrape_monitor/search_urls.txt", 'r') as urllist, open('scrape_monito
                     f.write(product['url'])
                     f.write('\n')
 
-                    #json.dump(product, outfile)
-                    #outfile.write(", \n")
+                    json.dump(product, outfile)
+                    outfile.write(", \n")
                     # sleep(5)
                 
             except:
