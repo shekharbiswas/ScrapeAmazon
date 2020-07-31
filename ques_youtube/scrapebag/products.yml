@@ -1,0 +1,17 @@
+name:
+    css: '#productTitle'
+    type: Text
+
+
+Descriptif technique:
+    css: '.col1 tr'
+    multiple: true
+    type: Text
+    children:
+        info:
+            css: '.label'
+            type: Text
+        value:
+            css: '.value'
+            type: Text
+
