@@ -3,6 +3,15 @@ name:
     type: Text
 
 
+Description:
+    css: '#productDescription'
+    type: Text
+
+Details:
+    css: '#feature-bullets'
+    type: Text
+    
+
 Descriptif technique:
     css: '.col1 tr'
     multiple: true
